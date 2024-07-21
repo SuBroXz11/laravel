@@ -46,8 +46,16 @@ Route::get('/', function () {
 });
 
 // GET single listing
-Route::get('/listings/{id}', function ($id) {
+// Route::get('/listings/{id}', function ($id) {
+//     return view('listing', [
+//         'listing'=>Listing::find($id)
+//     ]);
+// });
+
+// power of eloquent model
+// now with this we dont need to handle if else to show 404 using abort() function and pass id
+Route::get('/listings/{listing}', function(Listing $listing){
     return view('listing', [
-        'listing'=>Listing::find($id)
+        'listing'=>$listing
     ]);
 });
