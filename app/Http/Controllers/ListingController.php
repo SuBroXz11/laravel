@@ -22,7 +22,7 @@ class ListingController extends Controller
         // dd(request()->tag);
         return view('listings.index', [ // copy pasted the return from our routes
             'heading' => 'Latest Listings',
-            'listings'=>Listing::latest()->filter(request(['tag', 'search']))->get()
+            'listings'=>Listing::latest()->filter(request(['tag', 'search']))->paginate(4) // we can also do simplePaginate()
         ]);
     }
     // Show single listing 
