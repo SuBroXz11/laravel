@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Listing;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +39,7 @@ use App\Models\Listing;
 // });
 
 // GET all listings
-Route::get('/', function () {
-    return view('listings', [
-        'heading' => 'Latest Listings',
-        'listings'=>Listing::all()
-    ]);
-});
+Route::get('/', [ListingController::class, 'index']); // importing controller is imp
 
 // GET single listing
 // Route::get('/listings/{id}', function ($id) {
@@ -54,8 +50,9 @@ Route::get('/', function () {
 
 // power of eloquent model
 // now with this we dont need to handle if else to show 404 using abort() function and pass id
-Route::get('/listings/{listing}', function(Listing $listing){
-    return view('listing', [
-        'listing'=>$listing
-    ]);
-});
+
+Route::get('/listings/create', [ListingController::class, 'create']);
+
+Route::post('/listings', [ListingController::class, 'store']);
+
+Route::get('/listings/{listing}', [ListingController::class, 'show']); // it should be down of above create because the above one will get this route and take as error

@@ -8,9 +8,7 @@
     <p>No listings found</p>
 @endif --}}
 
-@extends('layout')
-
-@section('content')
+<x-layout>
 
 {{-- <h1> --}}
     {{-- {{ $heading }} --}}
@@ -33,5 +31,4 @@
 @endunless
 
 </div>
-
-@endsection
+</x-layout>
