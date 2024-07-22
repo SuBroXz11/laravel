@@ -30,7 +30,7 @@ class ListingController extends Controller
         return view('listings.show', [
             'listing'=>$listing
         ]);
-    }
+    } 
 
     // Show Create Form
     public function create(){
@@ -40,6 +40,7 @@ class ListingController extends Controller
     // Store Listing Data
     public function store(Request $request){
     //    dd(request()->all()); this will give us all the value after we submit the form
+    // dd($request->file('logo'));
     $formFields=$request->validate([
         'title'=>'required',
         'company'=>['required', Rule::unique('listings')], // the listings is the name of table
@@ -49,6 +50,9 @@ class ListingController extends Controller
         'tags'=>'required',
         'description'=>'required',
     ]);
+    if($request->hasFile('logo')){
+        $formFields['logo']=$request->file('logo')->store('logos', 'public'); // save the img in the storage/public/logos
+    }
     Listing::create($formFields);
     return redirect('/')->with('message', 'Listing created successfully!');
     } 
