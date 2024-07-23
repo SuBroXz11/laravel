@@ -55,4 +55,6 @@ Route::get('/listings/create', [ListingController::class, 'create']);
 
 Route::post('/listings', [ListingController::class, 'store']);
 
+Route::post('/listings/{listing}/edit', [ListingController::class, 'edit']);
+
 Route::get('/listings/{listing}', [ListingController::class, 'show']); // it should be down of above create because the above one will get this route and take as error

@@ -56,4 +56,9 @@ class ListingController extends Controller
     Listing::create($formFields);
     return redirect('/')->with('message', 'Listing created successfully!');
     } 
+
+    // Edit listing Data
+    public function edit(){
+        return view('listings.create');
+    }
 }
