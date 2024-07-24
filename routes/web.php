@@ -3,6 +3,7 @@
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
 
 /*
@@ -63,3 +64,9 @@ Route::put('/listings/{listing}', [ListingController::class, 'update']);
 Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
 
 Route::get('/listings/{listing}', [ListingController::class, 'show']); // it should be down of above create because the above one will get this route and take as error
+
+// show resister/create page
+Route::get('/register', [UserController::class, 'create']);
+
+// Create new user
+Route::post('/users', [UserController::class, 'store']);
