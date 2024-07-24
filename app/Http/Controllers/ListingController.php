@@ -80,6 +80,7 @@ class ListingController extends Controller
             $formFields['logo']=$request->file('logo')->store('logos', 'public'); // save the img in the storage/public/logos
         }
         $listing->update($formFields);
-        return back()->with('message', 'Listing updated successfully!');
+        // return back()->with('message', 'Listing updated successfully!');
+        return redirect('/')->with('message', 'Listing updated successfully!');
         } 
 }
