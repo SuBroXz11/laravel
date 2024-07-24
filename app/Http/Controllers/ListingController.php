@@ -82,5 +82,11 @@ class ListingController extends Controller
         $listing->update($formFields);
         // return back()->with('message', 'Listing updated successfully!');
         return redirect('/')->with('message', 'Listing updated successfully!');
-        } 
+    } 
+    // Delete listing Data
+    public function destroy(Listing $listing){
+        // dd($listing);
+        $listing->delete();
+        return redirect('/')->with('message', 'Listing Deleted Successfully');
+    }
 }
