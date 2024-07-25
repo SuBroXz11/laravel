@@ -52,30 +52,31 @@ Route::get('/', [ListingController::class, 'index']); // importing controller is
 // power of eloquent model
 // now with this we dont need to handle if else to show 404 using abort() function and pass id
 
-Route::get('/listings/create', [ListingController::class, 'create']);
+// Show create or post job form
+Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 
 Route::post('/listings', [ListingController::class, 'store']);
 
-Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
 
 // Update listing
-Route::put('/listings/{listing}', [ListingController::class, 'update']);
+Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
 
-Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');
 
 Route::get('/listings/{listing}', [ListingController::class, 'show']); // it should be down of above create because the above one will get this route and take as error
 
 // show resister/create page
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest'); // this for if logged in, we dont want to show this
 
 // Create new user
 Route::post('/users', [UserController::class, 'store']);
 
 // Logout user
-Route::post('/logout', [UserController::class, 'logout']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
 // Show login form
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest'); 
 
 // Login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
