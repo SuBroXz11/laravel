@@ -50,9 +50,14 @@ class ListingController extends Controller
         'tags'=>'required',
         'description'=>'required',
     ]);
+
     if($request->hasFile('logo')){
         $formFields['logo']=$request->file('logo')->store('logos', 'public'); // save the img in the storage/public/logos
     }
+
+    // Adding ownership to the listings
+    $formFields['user_id']=auth()->id();
+
     Listing::create($formFields);
     return redirect('/')->with('message', 'Listing created successfully!');
     } 
@@ -83,10 +88,16 @@ class ListingController extends Controller
         // return back()->with('message', 'Listing updated successfully!');
         return redirect('/')->with('message', 'Listing updated successfully!');
     } 
+
     // Delete listing Data
     public function destroy(Listing $listing){
         // dd($listing);
         $listing->delete();
         return redirect('/')->with('message', 'Listing Deleted Successfully');
+    }
+
+    // Manage listing Data
+    public function manage(){
+        return view('listings.manage', ['listings'=> auth()->user()->listings()->get()]);
     }
 }
