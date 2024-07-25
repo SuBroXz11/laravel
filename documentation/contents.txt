@@ -1,0 +1,10 @@
+Day 1:  Basic routing , Model, blade files, dd function etc
+Day 2: Setting SQL, Migrations and seeder basic
+Day 3: factories, layouts partials props and components
+Day 4: controllers, naming conventions, layout as component, filtering tags and search, clockwork extension
+           creating C of crud, form validation using laravel, fixing mass assignment error
+Day 5: fixing mass assignment error in other way, flash message with alpine js, keeping old data in the form, 
+           pagination, File uploads
+Day 6: Edit or Update, Delete, User registration, Auth links, User logout
+Day 7: User Login, auth and guest middleware, relationships, tinker tinkering, adding ownership
+            to the listings, managing listing page and user authorization
