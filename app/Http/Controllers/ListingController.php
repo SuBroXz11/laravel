@@ -72,6 +72,12 @@ class ListingController extends Controller
     public function update(Request $request, Listing $listing){
         //    dd(request()->all()); this will give us all the value after we submit the form
         // dd($request->file('logo'));
+
+        // Make sure logged in user is owner
+        if($listing->user_id != auth()->id()){
+            abort(403, 'Unauthorized Action');
+        }
+
         $formFields=$request->validate([
             'title'=>'required',
             'company'=>'required', // the listings is the name of table
@@ -91,6 +97,11 @@ class ListingController extends Controller
 
     // Delete listing Data
     public function destroy(Listing $listing){
+
+         // Make sure logged in user is owner
+         if($listing->user_id != auth()->id()){
+            abort(403, 'Unauthorized Action');
+        }
         // dd($listing);
         $listing->delete();
         return redirect('/')->with('message', 'Listing Deleted Successfully');
