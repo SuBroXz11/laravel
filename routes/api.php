@@ -27,3 +27,8 @@ Route::get('/posts', function(){
         ]
         ]);
 });
+
+
+Route::get('/products', function(){
+    return 'products';
+});
