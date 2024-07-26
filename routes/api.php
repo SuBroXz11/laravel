@@ -30,11 +30,11 @@ Route::get('/posts', function(){
 });
 
 
-Route::get('/products', [ProductController::class, 'index']);
+// Route::get('/products', [ProductController::class, 'index']);
+// Route::post('/products', [ProductController::class, 'store']);
+// Route::get('/products/{id}', [ProductController::class, 'show']);
 
-Route::post('/products', [ProductController::class, 'store']);
+// INSTEAD OF DOING ABOVE ALL WE CAN DO THIS FOR BASIC CRUD APP and everything works
+Route::resource('products', ProductController::class);
 
-Route::get('/products/{id}', [ProductController::class, 'show']);
-
-Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
