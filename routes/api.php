@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +30,11 @@ Route::get('/posts', function(){
 });
 
 
-Route::get('/products', function(){
-    return Product::all();
-});
+Route::get('/products', [ProductController::class, 'index']);
 
-Route::post('/products', function(){
-    return Product::create([
-        'name'=> 'Product One',
-        'slug'=>'Product-one',
-        'description'=>'This is product one',
-        'price'=>'99.99'
-    ]);
-});
+Route::post('/products', [ProductController::class, 'store']);
+
+Route::get('/products/{id}', [ProductController::class, 'show']);
+
+Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+
