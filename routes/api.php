@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Api\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,7 @@ Route::get('/posts', function(){
 Route::resource('products', ProductController::class);
 
 Route::get('products/search/{name}', [ProductController::class, 'search']);
+
+Route::get('listings', [ListingController::class, 'index']);
 
 
