@@ -37,4 +37,6 @@ Route::get('/posts', function(){
 // INSTEAD OF DOING ABOVE ALL WE CAN DO THIS FOR BASIC CRUD APP and everything works
 Route::resource('products', ProductController::class);
 
+Route::get('products/search/{name}', [ProductController::class, 'search']);
+
 
