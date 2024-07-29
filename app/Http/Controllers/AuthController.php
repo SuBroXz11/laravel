@@ -42,4 +42,31 @@ class AuthController extends Controller
             'message'=>'Logged out successfully'
         ];
     }
+
+    public function login(Request $request){
+        // validation
+        $fields=$request->validate([
+            'name'=>'required|string',
+            'email'=>'required|string|unique:users,email',
+            'password'=>'required|confirmed',
+        ]);
+
+        // user creation
+        $user=User::create([
+            'name'=>$fields['name'],
+            'email'=>$fields['email'],
+            'password'=> bcrypt($fields['password'])
+        ]);
+
+        // token creation
+        $token = $user->createToken('myapptoken')->plainTextToken;
+
+        // creating and sending the response
+        $response=[
+            'user'=>$user,
+            'token'=>$token
+        ];
+
+        return response($response, 201);
+    }
 }
