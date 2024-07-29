@@ -16,10 +16,12 @@ use App\Http\Controllers\Api\ListingController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//  Protected routes
+Route::group(['middleware'=>['auth:sanctum']], function () {
+    Route::get('products/search/{name}', [ProductController::class, 'search']);
 });
 
+//  Public routes
 // SIMPLE API CREATION
 
 Route::get('/posts', function(){
@@ -37,8 +39,6 @@ Route::get('/posts', function(){
 
 // INSTEAD OF DOING ABOVE,  WE CAN DO THIS FOR BASIC CRUD APP and everything works
 Route::resource('products', ProductController::class);
-
-Route::get('products/search/{name}', [ProductController::class, 'search']);
 
 Route::get('listings', [ListingController::class, 'index']);
 
