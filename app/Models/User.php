@@ -5,13 +5,16 @@ namespace App\Models;
 use App\Models\Listing;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Concerns\IsFilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Filament\Models\Concerns\SendsFilamentPasswordResetNotification;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, IsFilamentUser, SendsFilamentPasswordResetNotification;
 
     /**
      * The attributes that are mass assignable.
@@ -43,8 +46,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static $filamentAdminColumn = 'is_filament_admin';
+    public static $filamentRolesColumn = 'filament_roles';
+
     // Relationship with Listings
     public function listings(){
         return $this->hasMany(Listing::class, 'user_id');
     }
+
+    // preventing all users from ascessing the filament
+    public function canAccessFilament()
+{
+    return $this->group === 'Filament Users';
+}
 }
