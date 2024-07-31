@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Listing extends Model
 {
+    use CrudTrait;
     use HasFactory;
     
     // protected $fillable = ['title', 'company', 'location', 'website', 'email', 'description', 'tags'];
