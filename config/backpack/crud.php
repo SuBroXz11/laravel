@@ -293,7 +293,7 @@ return [
         // "naq_NA" => "Nama (Namibia)",
         // "naq" => "Nama",
         // "ne_IN" => "Nepali (India)",
-        // "ne_NP" => "Nepali (Nepal)",
+        "ne_NP" => "Nepali (Nepal)",
         // "ne" => "Nepali",
         // "nd_ZW" => "North Ndebele (Zimbabwe)",
         // "nd" => "North Ndebele",
@@ -468,3 +468,4 @@ return [
     ],
 
 ];
+ 
